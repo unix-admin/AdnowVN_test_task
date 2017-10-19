@@ -94,7 +94,10 @@ class Books extends \yii\db\ActiveRecord
     public function upload()
     {
         if ($this->validate()) {
-
+            $filepath = Yii::getAlias('@app/web/uploads');
+            if (!(file_exists($filepath) && is_dir($filepath))){
+                mkdir($filepath,0755);
+            }
             $this->image->saveAs('uploads/' . $this->image->baseName . '.' . $this->image->extension);
             $this->preview = '/uploads/' . $this->image->baseName . '.' . $this->image->extension;
             return true;

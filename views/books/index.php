@@ -140,7 +140,13 @@ echo newerton\fancybox\FancyBox::widget([
             [
                 'attribute' => 'author_id',
                 'value'=>function($model){
-                    return $model->author->getFullName();
+                    if ($model->author_id){
+                        return $model->author->getFullName();
+                    }
+                    else{
+                        return 'Автор неизвестен';
+                    }
+
                 }
             ],
             [
